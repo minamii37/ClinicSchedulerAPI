@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1700.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicSchedulerAPI", "ClinicSchedulerAPI\ClinicSchedulerAPI.csproj", "{98AE87D6-1C16-4731-BA2E-5941462677B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98AE87D6-1C16-4731-BA2E-5941462677B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AE87D6-1C16-4731-BA2E-5941462677B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AE87D6-1C16-4731-BA2E-5941462677B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AE87D6-1C16-4731-BA2E-5941462677B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B55F8CC-97E2-49E9-AF19-4BAE3E95F68C}
+	EndGlobalSection
+EndGlobal
