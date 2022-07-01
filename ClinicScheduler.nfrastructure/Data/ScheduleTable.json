@@ -1,0 +1,15 @@
+﻿[
+
+  {
+    "DoctorId": "D001",
+    "TargetDateTime": "2022-07-04T09:00:00",
+    "IsEmpty": false,
+    "PatientId": "P001",
+    "ReservationDateTime": "2022-06-30T14:00:00",
+    "ApprovalId": "A001",
+    "ApprovalDateTime": "2022-06-30T14:10:00",
+    "CreateDateTime": "2022-06-30T14:00:00",
+    "LastUpdateTime": "2022-06-30T14:10:00",
+    "LastUpdateId": "2022-06-30T14:10:00"
+  }
+]

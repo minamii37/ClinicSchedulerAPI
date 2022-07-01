@@ -1,6 +1,10 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using ClinicScheduler.Application.IServices;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Transient：使い捨て
+builder.Services.AddTransient<IScheduleService, Schedule>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,8 +19,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-// test
 
 app.UseHttpsRedirection();
 
