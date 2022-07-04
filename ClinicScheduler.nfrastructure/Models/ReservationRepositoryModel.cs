@@ -16,10 +16,6 @@ namespace ClinicScheduler.Infrastructure.Models
         /// </summary>
         public DateTime TargetDateTime { get; set; }
         /// <summary>
-        /// 予約空き状況
-        /// </summary>
-        public bool IsEmpty { get; set; }
-        /// <summary>
         /// 患者ID
         /// </summary>
         public string? PatientId { get; set; }

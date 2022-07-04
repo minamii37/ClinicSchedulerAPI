@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "ReservationId": "{7EE86A1C-2254-4766-BB1B-FC9F3AC4C1AE}",
     "DoctorId": "D001",
@@ -52,5 +52,14 @@
     "ReservationDateTime": "2022-06-30T14:00:00",
     "ApprovalId": "A001",
     "ApprovalDateTime": "2022-06-30T14:10:00"
+  },
+  {
+    "ReservationId": "6ce5a42c-3feb-4065-88e0-f4876033c505",
+    "DoctorId": "D001",
+    "TargetDateTime": "2022-07-08T10:00:00",
+    "PatientId": "A001",
+    "ReservationDateTime": "2022-07-04T20:16:17.59587+09:00",
+    "ApprovalId": null,
+    "ApprovalDateTime": null
   }
 ]

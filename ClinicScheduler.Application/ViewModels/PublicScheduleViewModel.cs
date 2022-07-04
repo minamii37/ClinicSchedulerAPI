@@ -30,7 +30,7 @@ namespace ClinicScheduler.Application.ViewModels
         {
         }
 
-        public PublicScheduleViewModel PublicConverter(ScheduleDomainModel model)
+        public PublicScheduleViewModel PublicPresenter(BaseDomainModel model)
             => new PublicScheduleViewModel()
             {
                 DoctorId = model.DoctorId,
@@ -38,7 +38,7 @@ namespace ClinicScheduler.Application.ViewModels
                 TargetDateTime = model.TargetDateTime,
             };
 
-        public PublicScheduleViewModel PrivateConverter(ScheduleDomainModel model)
+        public PublicScheduleViewModel PrivatePresenter(BaseDomainModel model)
             => new PublicScheduleViewModel()
             {
                 DoctorId = model.DoctorId,
@@ -48,6 +48,15 @@ namespace ClinicScheduler.Application.ViewModels
                 PatientName = model.PatientName,
             };
 
+        public ReservationDomainModel ReservationTransfer(PublicScheduleViewModel request)
+            => new ReservationDomainModel()
+            {
+                DoctorId = request.DoctorId,
+                DoctorName = request.DoctorName,
+                TargetDateTime = request.TargetDateTime,
+                PatientId = request.PatientId,
+                PatientName = request.PatientName,
+            };
     }
 }
 
