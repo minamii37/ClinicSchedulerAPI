@@ -28,7 +28,7 @@ namespace ClinicScheduler.Application.IServices
         private static IEnumerable<PublicScheduleViewModel> ConvertToViewModels(IEnumerable<ScheduleDomainModel> models)
         {
             var views = new List<PublicScheduleViewModel>();
-            models.ToList().ForEach(x => views.Add(new PublicScheduleViewModel().Converter(x)));
+            models.ToList().ForEach(x => views.Add(new PublicScheduleViewModel().PublicConverter(x)));
 
             return views;
         }
