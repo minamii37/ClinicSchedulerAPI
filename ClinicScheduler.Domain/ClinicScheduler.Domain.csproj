@@ -9,13 +9,9 @@
   <ItemGroup>
     <None Remove="Repositories\" />
     <None Remove="Models\" />
-    <None Remove="Logic\" />
-    <None Remove="ILogic\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <Folder Include="IRepositories\" />
     <Folder Include="Models\" />
-    <Folder Include="Logic\" />
-    <Folder Include="ILogic\" />
   </ItemGroup>
 </Project>

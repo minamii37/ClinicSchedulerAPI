@@ -1,8 +1,12 @@
 ﻿using System;
 namespace ClinicScheduler.Infrastructure.Models
 {
-    public class ScheduleRepositoryModel : BaseRepositoryModel
+    public class ReservationRepositoryModel
     {
+        /// <summary>
+        /// 予約ID
+        /// </summary>
+        public string ReservationId { get; set; }
         /// <summary>
         /// ドクターID
         /// </summary>

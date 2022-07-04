@@ -8,18 +8,23 @@ namespace ClinicSchedulerAPI.Controllers;
 [Route("api/[controller]")]
 public class ScheduleController : ControllerBase
 {
-    private readonly IScheduleService _test;
+    private readonly IPublicScheduleService _publicScheduleService;
 
-    public ScheduleController(ILogger<WeatherForecastController> logger, IScheduleService test)
+    public ScheduleController(IPublicScheduleService publicScheduleService)
     {
-        _test = test;
+        _publicScheduleService = publicScheduleService;
     }
 
-    //[HttpGet("Piyo")]
-    [HttpGet(Name = "GetTestPiyo")]
-    public IEnumerable<ScheduleViewModel> GetTestPiyo()
+    [HttpGet]
+    public IEnumerable<PublicScheduleViewModel> GetPublicSchedule()
     {
-        return _test.GetScheduleService().ToList();
+        return _publicScheduleService.GetPublicScheduleService().ToList();
+    }
+
+    [HttpGet("doctorId")]
+    public IEnumerable<PublicScheduleViewModel> GetPublicScheduleByDoctorId(string doctorId)
+    {
+        return _publicScheduleService.GetPublicScheduleService(doctorId).ToList();
     }
 }
 
