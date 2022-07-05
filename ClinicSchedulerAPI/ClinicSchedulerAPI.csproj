@@ -17,7 +17,7 @@
     <ProjectReference Include="..\ClinicScheduler.Domain\ClinicScheduler.Domain.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\ClinicScheduler.nfrastructure\ClinicScheduler.Infrastructure.csproj">
+    <ProjectReference Include="..\ClinicScheduler.Infrastructure\ClinicScheduler.Infrastructure.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

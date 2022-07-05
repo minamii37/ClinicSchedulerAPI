@@ -16,13 +16,13 @@ public class ScheduleController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<PublicScheduleViewModel> GetPublicSchedule()
+    public IEnumerable<ScheduleViewModel> GetPublicSchedule()
     {
         return _publicScheduleService.GetPublicScheduleService().ToList();
     }
 
     [HttpGet("doctorId")]
-    public IEnumerable<PublicScheduleViewModel> GetPublicScheduleByDoctorId(string doctorId)
+    public IEnumerable<ScheduleViewModel> GetPublicScheduleByDoctorId(string doctorId)
     {
         return _publicScheduleService.GetPublicScheduleService(doctorId).ToList();
     }

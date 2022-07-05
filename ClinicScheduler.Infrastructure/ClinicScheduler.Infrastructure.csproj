@@ -11,11 +11,13 @@
     <None Remove="Models\" />
     <None Remove="Data\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="DBAccess\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Models\" />
     <Folder Include="Data\" />
+    <Folder Include="DBAccess\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClinicScheduler.Domain\ClinicScheduler.Domain.csproj" />

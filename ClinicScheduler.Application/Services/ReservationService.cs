@@ -14,11 +14,11 @@ namespace ClinicScheduler.Application.IServices
             _reservateRepository = reservateRepository;
         }
 
-        public PublicScheduleViewModel PostReservationService(PublicScheduleViewModel request)
+        public ReservationViewModel PostReservationService(ReservationViewModel request)
         {
-            var model = new PublicScheduleViewModel().ReservationTransfer(request);
+            var model = new ReservationViewModel().ReservationTransfer(request);
             model = _reservateRepository.PostReservation(model);
-            return new PublicScheduleViewModel().PrivatePresenter(model);
+            return new ReservationViewModel().Presenter(model);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace ClinicScheduler.Application.IServices
             _scheduleRepository = scheduleRepositpry;
         }
 
-        public IEnumerable<PublicScheduleViewModel> GetPublicScheduleService()
+        public IEnumerable<ScheduleViewModel> GetPublicScheduleService()
             => ConvertToViewModels(_scheduleRepository.GetPublicSchedule());
 
-        public IEnumerable<PublicScheduleViewModel> GetPublicScheduleService(string doctorId)
+        public IEnumerable<ScheduleViewModel> GetPublicScheduleService(string doctorId)
             => ConvertToViewModels(_scheduleRepository.GetPublicScheduleByDoctorId(doctorId));
 
         /// <summary>
@@ -25,12 +25,12 @@ namespace ClinicScheduler.Application.IServices
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        private static IEnumerable<PublicScheduleViewModel> ConvertToViewModels(IEnumerable<ScheduleDomainModel> models)
+        private static IEnumerable<ScheduleViewModel> ConvertToViewModels(IEnumerable<ScheduleDomainModel> models)
         {
-            var views = new List<PublicScheduleViewModel>();
+            var views = new List<ScheduleViewModel>();
             // 表示順は日付、ドクター名順
             models.OrderBy(x => x.TargetDateTime).ThenBy(x => x.DoctorName).ToList()
-                .ForEach(x => views.Add(new PublicScheduleViewModel().PublicPresenter(x)));
+                .ForEach(x => views.Add(new ScheduleViewModel().PublicPresenter(x)));
 
             return views;
         }

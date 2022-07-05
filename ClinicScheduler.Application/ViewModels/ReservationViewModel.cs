@@ -3,7 +3,7 @@ using ClinicScheduler.Domain.Models;
 
 namespace ClinicScheduler.Application.ViewModels
 {
-    public class PublicScheduleViewModel
+    public class ReservationViewModel
     {
         /// <summary>
         /// 医師ID
@@ -26,29 +26,21 @@ namespace ClinicScheduler.Application.ViewModels
         /// </summary>
         public string? PatientName { get; set; }
 
-        public PublicScheduleViewModel()
+        public ReservationViewModel()
         {
         }
 
-        public PublicScheduleViewModel PublicPresenter(BaseDomainModel model)
-            => new PublicScheduleViewModel()
+        public ReservationViewModel Presenter(ReservationDomainModel model)
+            => new ReservationViewModel()
             {
                 DoctorId = model.DoctorId,
-                DoctorName = model.DoctorName,
-                TargetDateTime = model.TargetDateTime,
-            };
-
-        public PublicScheduleViewModel PrivatePresenter(BaseDomainModel model)
-            => new PublicScheduleViewModel()
-            {
-                DoctorId = model.DoctorId,
-                DoctorName = model.DoctorName,
+                DoctorName = model.DoctorName!,
                 TargetDateTime = model.TargetDateTime,
                 PatientId = model.PatientId,
                 PatientName = model.PatientName,
             };
 
-        public ReservationDomainModel ReservationTransfer(PublicScheduleViewModel request)
+        public ReservationDomainModel ReservationTransfer(ReservationViewModel request)
             => new ReservationDomainModel()
             {
                 DoctorId = request.DoctorId,
@@ -59,4 +51,3 @@ namespace ClinicScheduler.Application.ViewModels
             };
     }
 }
-

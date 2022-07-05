@@ -9,7 +9,7 @@ namespace ClinicScheduler.Application.IServices
         /// 予約の実施
         /// </summary>
         /// <returns>スケジュール</returns>
-        PublicScheduleViewModel PostReservationService(PublicScheduleViewModel request);
+        ReservationViewModel PostReservationService(ReservationViewModel request);
     }
 }
 

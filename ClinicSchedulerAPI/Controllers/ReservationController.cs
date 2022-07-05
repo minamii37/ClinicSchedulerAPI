@@ -16,7 +16,7 @@ public class ReservationController : ControllerBase
     }
 
     [HttpPost]
-    public PublicScheduleViewModel PostReservation([FromBody]PublicScheduleViewModel views)
+    public ReservationViewModel PostReservation([FromBody]ReservationViewModel views)
     {
         return _reservateService.PostReservationService(views);
     }

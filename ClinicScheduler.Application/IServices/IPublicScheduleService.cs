@@ -9,13 +9,13 @@ namespace ClinicScheduler.Application.IServices
         /// 公開スケジュールの取得
         /// </summary>
         /// <returns>スケジュール</returns>
-        IEnumerable<PublicScheduleViewModel> GetPublicScheduleService();
+        IEnumerable<ScheduleViewModel> GetPublicScheduleService();
 
         /// <summary>
         /// 医師別公開スケジュールの取得
         /// </summary>
         /// <returns>スケジュール</returns>
-        IEnumerable<PublicScheduleViewModel> GetPublicScheduleService(string doctorId);
+        IEnumerable<ScheduleViewModel> GetPublicScheduleService(string doctorId);
     }
 }
 
