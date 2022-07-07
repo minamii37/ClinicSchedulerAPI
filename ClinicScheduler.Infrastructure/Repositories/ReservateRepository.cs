@@ -93,14 +93,13 @@ namespace ClinicScheduler.Infrastructure.Repositories
         /// <param name="reservations"></param>
         /// <returns></returns>
         private ReservationDomainModel ConvertModel(ReservationRepositoryModel reservation, DoctorInfoRepositoryModel? doctorInfo)
-            => new ReservationDomainModel()
-                {
-                    DoctorId = reservation.DoctorId,
-                    DoctorName = doctorInfo?.DoctorName,
-                    TargetDateTime = reservation.TargetDateTime,
-                    PatientId = reservation.PatientId,
-                    ReservationDateTime = reservation.ReservationDateTime,
-                };
+            => new ReservationDomainModel(
+                reservation.DoctorId,
+                doctorInfo?.DoctorName,
+                reservation.TargetDateTime,
+                reservation.PatientId,
+                null,
+                reservation.ReservationDateTime);
     }
 }
 

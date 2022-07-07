@@ -16,7 +16,15 @@ namespace ClinicScheduler.Domain.IRepositories
         /// </summary>
         /// <param name="doctorId">ドクターID</param>
         /// <returns>ドクター別スケジュール</returns>
-        IEnumerable<ScheduleDomainModel> GetPublicScheduleByDoctorId(string doctorId);
+        IEnumerable<ScheduleDomainModel> GetDoctorPublicSchedule(string doctorId);
+
+        /// <summary>
+        /// ドクター別指定週スケジュールの取得
+        /// </summary>
+        /// <param name="doctorId">ドクターID</param>
+        /// <param name="startDate">スケジュール開始日</param>
+        /// <returns>ドクター別スケジュール</returns>
+        IEnumerable<ScheduleDomainModel> GetDoctorPublicScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate);
     }
 }
 

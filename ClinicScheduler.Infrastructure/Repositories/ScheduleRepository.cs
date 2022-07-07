@@ -31,13 +31,30 @@ namespace ClinicScheduler.Infrastructure.Repositories
             return ConvertModels(reservations, doctorInfomations);
         }
 
-        public IEnumerable<ScheduleDomainModel> GetPublicScheduleByDoctorId(string doctorId)
+        public IEnumerable<ScheduleDomainModel> GetDoctorPublicSchedule(string doctorId)
         {
             // ドクター情報を取得する
             var doctorInfomations = GetDoctorInfomations(new[] { doctorId });
 
             // ドクターに紐づく予約情報を取得する
             var reservations = GetReservations().Where(x => x.DoctorId.Equals(doctorId));
+            if (!reservations.Any())
+            {
+                return Enumerable.Empty<ScheduleDomainModel>();
+            }
+
+            return ConvertModels(reservations, doctorInfomations);
+        }
+
+        public IEnumerable<ScheduleDomainModel> GetDoctorPublicScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
+        {
+            // ドクター情報を取得する
+            var doctorInfomations = GetDoctorInfomations(new[] { doctorId });
+
+            // ドクターに紐づく開始日から一週間の予約情報を取得する
+            var reservations = GetReservations().Where(
+                x => x.DoctorId.Equals(doctorId)
+                && x.TargetDateTime >= startDate && x.TargetDateTime < startDate.AddDays(7));
             if (!reservations.Any())
             {
                 return Enumerable.Empty<ScheduleDomainModel>();

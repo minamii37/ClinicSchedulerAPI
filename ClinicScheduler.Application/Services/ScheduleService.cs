@@ -15,10 +15,13 @@ namespace ClinicScheduler.Application.IServices
         }
 
         public IEnumerable<ScheduleViewModel> GetPublicScheduleService()
-            => ConvertToViewModels(_scheduleRepository.GetPublicSchedule());
+        => ConvertToViewModels(_scheduleRepository.GetPublicSchedule());
 
-        public IEnumerable<ScheduleViewModel> GetPublicScheduleService(string doctorId)
-            => ConvertToViewModels(_scheduleRepository.GetPublicScheduleByDoctorId(doctorId));
+        public IEnumerable<ScheduleViewModel>GetDoctorPublicScheduleService(string doctorId)
+            => ConvertToViewModels(_scheduleRepository.GetDoctorPublicSchedule(doctorId));
+
+        public IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeekService(string doctorId, DateTime startDate)
+            => ConvertToViewModels(_scheduleRepository.GetDoctorPublicScheduleForTheSpecifiedWeek(doctorId, startDate));
 
         /// <summary>
         /// ViewModelへ変換

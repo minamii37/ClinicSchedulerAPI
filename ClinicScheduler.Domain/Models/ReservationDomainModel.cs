@@ -28,9 +28,25 @@ namespace ClinicScheduler.Domain.Models
         /// </summary>
         public DateTime? ReservationDateTime { get; set; }
 
-        public ReservationDomainModel()
+        public ReservationDomainModel(
+            string doctorId, string? doctorName, DateTime targetDateTime, string? patientId, string? patientName, DateTime? reservationDateTime)
         {
+            DoctorId = doctorId;
+            DoctorName = doctorName;
+            TargetDateTime = targetDateTime;
+            PatientId = patientId;
+            PatientName = patientName;
+            ReservationDateTime = reservationDateTime;
+        }
 
+        public void CheckDupulicate(IEnumerable<ReservationDomainModel> duplicateModels, ReservationDomainModel request)
+        {
+            if (!duplicateModels.Any())
+            {
+                return;
+            }
+
+            //var hitModels = duplicateModels.Where(x => x.TargetDateTime)
         }
     }
 }

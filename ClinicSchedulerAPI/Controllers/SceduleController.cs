@@ -22,9 +22,15 @@ public class ScheduleController : ControllerBase
     }
 
     [HttpGet("doctorId")]
-    public IEnumerable<ScheduleViewModel> GetPublicScheduleByDoctorId(string doctorId)
+    public IEnumerable<ScheduleViewModel> GetDoctorPublicSchedule(string doctorId)
     {
-        return _publicScheduleService.GetPublicScheduleService(doctorId).ToList();
+        return _publicScheduleService.GetDoctorPublicScheduleService(doctorId).ToList();
+    }
+
+    [HttpGet("doctorId/startDate")]
+    public IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
+    {
+        return _publicScheduleService.GetDoctorPublicScheduleForTheSpecifiedWeekService(doctorId, startDate).ToList();
     }
 }
 

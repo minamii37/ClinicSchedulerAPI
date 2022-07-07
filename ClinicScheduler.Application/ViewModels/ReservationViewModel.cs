@@ -40,14 +40,13 @@ namespace ClinicScheduler.Application.ViewModels
                 PatientName = model.PatientName,
             };
 
-        public ReservationDomainModel ReservationTransfer(ReservationViewModel request)
-            => new ReservationDomainModel()
-            {
-                DoctorId = request.DoctorId,
-                DoctorName = request.DoctorName,
-                TargetDateTime = request.TargetDateTime,
-                PatientId = request.PatientId,
-                PatientName = request.PatientName,
-            };
+        public ReservationDomainModel Transfer(ReservationViewModel request)
+            => new ReservationDomainModel(
+                request.DoctorId,
+                request.DoctorName,
+                request.TargetDateTime,
+                request.PatientId,
+                request.PatientName,
+                null);
     }
 }

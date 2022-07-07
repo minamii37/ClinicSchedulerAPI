@@ -14,8 +14,17 @@ namespace ClinicScheduler.Application.IServices
         /// <summary>
         /// 医師別公開スケジュールの取得
         /// </summary>
+        /// <param name="doctorId">医師ID</param>
         /// <returns>スケジュール</returns>
-        IEnumerable<ScheduleViewModel> GetPublicScheduleService(string doctorId);
+        IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleService(string doctorId);
+
+        /// <summary>
+        /// 医師別公開スケジュールの取得（開始日指定）
+        /// </summary>
+        /// <param name="doctorId">医師ID</param>
+        /// <param name="startDate">開始日</param>
+        /// <returns>スケジュール</returns>
+        IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeekService(string doctorId, DateTime startDate);
     }
 }
 
