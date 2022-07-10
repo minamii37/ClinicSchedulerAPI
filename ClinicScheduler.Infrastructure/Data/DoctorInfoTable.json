@@ -1,10 +1,10 @@
 ﻿[
   {
-    "DoctorId": "D001",
+    "DoctorId": "82cf8615-fc57-4b93-9177-d8c87256a5d1",
     "DoctorName": "医師001"
   },
   {
-    "DoctorId": "D002",
+    "DoctorId": "82cf8615-fc57-4b93-9177-d8c87256a5d2",
     "DoctorName": "医師002"
   }
 ]

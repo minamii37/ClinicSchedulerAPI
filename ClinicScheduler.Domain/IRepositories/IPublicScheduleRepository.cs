@@ -3,7 +3,7 @@ using ClinicScheduler.Domain.Models;
 
 namespace ClinicScheduler.Domain.IRepositories
 {
-    public interface IScheduleRepository
+    public interface IPublicScheduleRepository
     {
         /// <summary>
         /// 全スケジュールの取得

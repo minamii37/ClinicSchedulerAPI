@@ -10,7 +10,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
 {
     public class ReservateRepository : IReservateRepository
     {
-        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.Infrastructure/Data";
+        private readonly string directoryPath = "../ClinicScheduler.Infrastructure/Data";
 
         public ReservateRepository()
         {

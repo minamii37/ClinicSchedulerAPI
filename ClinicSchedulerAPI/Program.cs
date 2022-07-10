@@ -6,9 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Transient：使い捨て
+builder.Services.AddTransient<IPrivateScheduleService, PrivateScheduleService>();
 builder.Services.AddTransient<IPublicScheduleService, PublicScheduleService>();
 builder.Services.AddTransient<IReservateService, ReservationService>();
-builder.Services.AddTransient<IScheduleRepository, ScheduleRepository>();
+
+builder.Services.AddTransient<IPrivateScheduleRepository, PrivateScheduleRepository>();
+builder.Services.AddTransient<IPublicScheduleRepository, PublicScheduleRepository>();
 builder.Services.AddTransient<IReservateRepository, ReservateRepository>();
 
 builder.Services.AddControllers();

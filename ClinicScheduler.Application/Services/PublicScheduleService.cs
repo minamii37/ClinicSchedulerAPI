@@ -7,21 +7,21 @@ namespace ClinicScheduler.Application.IServices
 {
     public class PublicScheduleService : IPublicScheduleService
     {
-        private readonly IScheduleRepository _scheduleRepository;
+        private readonly IPublicScheduleRepository _publicScheduleRepository;
 
-        public PublicScheduleService(IScheduleRepository scheduleRepositpry)
+        public PublicScheduleService(IPublicScheduleRepository publicScheduleRepositpry)
         {
-            _scheduleRepository = scheduleRepositpry;
+            _publicScheduleRepository = publicScheduleRepositpry;
         }
 
         public IEnumerable<ScheduleViewModel> GetPublicScheduleService()
-        => ConvertToViewModels(_scheduleRepository.GetPublicSchedule());
+        => ConvertToViewModels(_publicScheduleRepository.GetPublicSchedule());
 
         public IEnumerable<ScheduleViewModel>GetDoctorPublicScheduleService(string doctorId)
-            => ConvertToViewModels(_scheduleRepository.GetDoctorPublicSchedule(doctorId));
+            => ConvertToViewModels(_publicScheduleRepository.GetDoctorPublicSchedule(doctorId));
 
         public IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeekService(string doctorId, DateTime startDate)
-            => ConvertToViewModels(_scheduleRepository.GetDoctorPublicScheduleForTheSpecifiedWeek(doctorId, startDate));
+            => ConvertToViewModels(_publicScheduleRepository.GetDoctorPublicScheduleForTheSpecifiedWeek(doctorId, startDate));
 
         /// <summary>
         /// ViewModelへ変換

@@ -8,11 +8,11 @@ using System.Net;
 
 namespace ClinicScheduler.Infrastructure.Repositories
 {
-    public class ScheduleRepository : IScheduleRepository
+    public class PublicScheduleRepository : IPublicScheduleRepository
     {
-        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.Infrastructure/Data";
+        private readonly string directoryPath = "../ClinicScheduler.Infrastructure/Data";
 
-        public ScheduleRepository()
+        public PublicScheduleRepository()
         {
         }
 
@@ -122,10 +122,10 @@ namespace ClinicScheduler.Infrastructure.Repositories
                         DoctorId = doctorInfo.DoctorId,
                         DoctorName = doctorInfo.DoctorName,
                         TargetDateTime = reservation.TargetDateTime,
-                        PatientId = reservation.PatientId,
+                        //PatientId = reservation.PatientId,
                         ReservationDateTime = reservation.ReservationDateTime,
-                        ApprovalId = reservation.ApprovalId,
-                        ApprovalDateTime = reservation.ApprovalDateTime,
+                        //ApprovalId = reservation.ApprovalId,
+                        //ApprovalDateTime = reservation.ApprovalDateTime,
                     };
 
                     domainModels = domainModels.Append(domainModel);

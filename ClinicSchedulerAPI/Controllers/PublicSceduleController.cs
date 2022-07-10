@@ -6,11 +6,11 @@ namespace ClinicSchedulerAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ScheduleController : ControllerBase
+public class PublicScheduleController : ControllerBase
 {
     private readonly IPublicScheduleService _publicScheduleService;
 
-    public ScheduleController(IPublicScheduleService publicScheduleService)
+    public PublicScheduleController(IPublicScheduleService publicScheduleService)
     {
         _publicScheduleService = publicScheduleService;
     }
