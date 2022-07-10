@@ -14,6 +14,18 @@ namespace ClinicScheduler.Application.IServices
             _reservateRepository = reservateRepository;
         }
 
+        public IEnumerable<ReservationViewModel> GetOwnReservationsService(string patientId)
+        {
+            var models = _reservateRepository.GetOwnReservations(patientId);
+            var views = new List<ReservationViewModel>();
+            foreach (var model in models)
+            {
+                var view = new ReservationViewModel().Presenter(model);
+                views.Add(view);
+            }
+            return views;
+        }
+
         public ReservationViewModel PostReservationService(ReservationViewModel requestView)
         {
             var requestModel = new ReservationViewModel().Transfer(requestView);

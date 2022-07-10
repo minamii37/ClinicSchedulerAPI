@@ -15,6 +15,12 @@ public class ReservationController : ControllerBase
         _reservateService = reservateService;
     }
 
+    [HttpGet("patientId")]
+    public IEnumerable<ReservationViewModel> GetOwnReservation(string patientId)
+    {
+        return _reservateService.GetOwnReservationsService(patientId);
+    }
+
     [HttpPost]
     public ReservationViewModel PostReservation([FromBody]ReservationViewModel views)
     {

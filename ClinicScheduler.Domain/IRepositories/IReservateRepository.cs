@@ -6,6 +6,13 @@ namespace ClinicScheduler.Domain.IRepositories
     public interface IReservateRepository
     {
         /// <summary>
+        /// 自分の予約情報の取得
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        IEnumerable<ReservationDomainModel> GetOwnReservations(string patientId);
+
+        /// <summary>
         /// 既存の関連する予約の取得
         /// </summary>
         /// <param name="patientId">患者ID</param>

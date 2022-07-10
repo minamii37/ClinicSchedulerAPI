@@ -25,6 +25,10 @@ namespace ClinicScheduler.Application.ViewModels
         /// 患者名
         /// </summary>
         public string? PatientName { get; set; }
+        /// <summary>
+        /// 予約日時
+        /// </summary>
+        public DateTime? ReservationDateTime { get; set; }
 
         public ReservationViewModel()
         {
@@ -38,6 +42,7 @@ namespace ClinicScheduler.Application.ViewModels
                 TargetDateTime = model.TargetDateTime,
                 PatientId = model.PatientId,
                 PatientName = model.PatientName,
+                ReservationDateTime = model.ReservationDateTime
             };
 
         public ReservationDomainModel Transfer(ReservationViewModel request)

@@ -18,7 +18,7 @@ namespace ClinicScheduler.Infrastructure.Models
         /// <summary>
         /// 患者ID
         /// </summary>
-        public string? PatientId { get; set; }
+        public string PatientId { get; set; }
         /// <summary>
         /// 予約日時
         /// </summary>

@@ -1,22 +1,27 @@
 ﻿[
   {
     "PatientId": "82cf8615-fc57-4b93-9177-d8c87256a5p1",
-    "PatientName": "患者001"
+    "PatientName": "患者001",
+    "CreateDate": "2022-06-30T14:00:00"
   },
   {
     "PatientId": "82cf8615-fc57-4b93-9177-d8c87256a5p2",
-    "PatientName": "患者002"
+    "PatientName": "患者002",
+    "CreateDate": "2022-06-30T14:00:00"
   },
   {
     "PatientId": "82cf8615-fc57-4b93-9177-d8c87256a5p3",
-    "PatientName": "患者003"
+    "PatientName": "患者003",
+    "CreateDate": "2022-06-30T14:00:00"
   },
   {
     "PatientId": "82cf8615-fc57-4b93-9177-d8c87256a5p4",
-    "PatientName": "患者004"
+    "PatientName": "患者004",
+    "CreateDate": "2022-06-30T14:00:00"
   },
   {
     "PatientId": "82cf8615-fc57-4b93-9177-d8c87256a5p5",
-    "PatientName": "患者005"
+    "PatientName": "患者005",
+    "CreateDate": "2022-06-30T14:00:00"
   }
 ]

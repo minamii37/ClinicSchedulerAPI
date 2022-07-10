@@ -11,6 +11,10 @@ namespace ClinicScheduler.Infrastructure.Models
         /// 患者氏名
         /// </summary>
         public string PatientName { get; set; }
+        /// <summary>
+        /// 登録日時
+        /// </summary>
+        public DateTime CreateDate { get; set; }
     }
 }
 
