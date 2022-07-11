@@ -4,6 +4,10 @@ namespace ClinicScheduler.Domain.Models
     public class ReservationDomainModel
     {
         /// <summary>
+        /// 予約ID
+        /// </summary>
+        public string ReservationId { get; set; }
+        /// <summary>
         /// ドクターID
         /// </summary>
         public string DoctorId { get; set; }
@@ -18,7 +22,7 @@ namespace ClinicScheduler.Domain.Models
         /// <summary>
         /// 患者ID
         /// </summary>
-        public string? PatientId { get; set; }
+        public string PatientId { get; set; }
         /// <summary>
         /// 患者氏名
         /// </summary>
@@ -29,8 +33,9 @@ namespace ClinicScheduler.Domain.Models
         public DateTime? ReservationDateTime { get; set; }
 
         public ReservationDomainModel(
-            string doctorId, string? doctorName, DateTime targetDateTime, string? patientId, string? patientName, DateTime? reservationDateTime)
+            string reservationId, string doctorId, string? doctorName, DateTime targetDateTime, string patientId, string? patientName, DateTime? reservationDateTime)
         {
+            ReservationId = reservationId;
             DoctorId = doctorId;
             DoctorName = doctorName;
             TargetDateTime = targetDateTime;

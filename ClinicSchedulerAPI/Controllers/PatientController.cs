@@ -20,5 +20,11 @@ public class PatientController : ControllerBase
     {
         return _patientService.GetPatientListService().ToList();
     }
+
+    [HttpPost]
+    public PatientViewModel CreateNewPatientInfoService([FromBody]PatientViewModel request)
+    {
+        return _patientService.CreateNewPatientInfoService(request);
+    }
 }
 

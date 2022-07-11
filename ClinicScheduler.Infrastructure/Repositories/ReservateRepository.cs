@@ -74,7 +74,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
                 ReservationId = Guid.NewGuid().ToString(),
                 DoctorId = request.DoctorId,
                 TargetDateTime = request.TargetDateTime,
-                PatientId = request.PatientId,
+                PatientId = request.PatientId!,
                 ReservationDateTime = DateTime.Now
             };
 
@@ -83,7 +83,14 @@ namespace ClinicScheduler.Infrastructure.Repositories
             string json = JsonConvert.SerializeObject(reservations, Formatting.Indented);
             File.WriteAllText(@$"{ directoryPath}/ReservationTable.json", json);
 
-            return request;
+            return new ReservationDomainModel(
+                requestModel.ReservationId,
+                request.DoctorId,
+                request.DoctorName,
+                request.TargetDateTime,
+                request.PatientId,
+                request.PatientName,
+                requestModel.ReservationDateTime);
         }
 
         /// <summary>
@@ -133,6 +140,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
         /// <returns></returns>
         private ReservationDomainModel ConvertModel(ReservationRepositoryModel reservation, DoctorInfoRepositoryModel? doctorInfo)
             => new ReservationDomainModel(
+                reservation.ReservationId,
                 reservation.DoctorId,
                 doctorInfo?.DoctorName,
                 reservation.TargetDateTime,

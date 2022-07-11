@@ -16,7 +16,7 @@ namespace ClinicScheduler.Application.ViewModels
         /// <summary>
         /// 登録日時
         /// </summary>
-        public DateTime CreateDateTime { get; set; }
+        public DateTime? CreateDateTime { get; set; }
 
         public PatientViewModel()
         {
@@ -29,5 +29,11 @@ namespace ClinicScheduler.Application.ViewModels
                 PatientName = model.PatientName,
                 CreateDateTime = model.CreateDateTime
             };
+
+        public PatientDomainModel Transfer(PatientViewModel view)
+            => new PatientDomainModel(
+                view.PatientId,
+                view.PatientName,
+                null);
     }
 }

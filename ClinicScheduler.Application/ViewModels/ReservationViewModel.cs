@@ -6,6 +6,10 @@ namespace ClinicScheduler.Application.ViewModels
     public class ReservationViewModel
     {
         /// <summary>
+        /// 予約ID
+        /// </summary>
+        public string ReservationId { get; set; }
+        /// <summary>
         /// 医師ID
         /// </summary>
         public string DoctorId { get; set; }
@@ -37,6 +41,7 @@ namespace ClinicScheduler.Application.ViewModels
         public ReservationViewModel Presenter(ReservationDomainModel model)
             => new ReservationViewModel()
             {
+                ReservationId = model.ReservationId,
                 DoctorId = model.DoctorId,
                 DoctorName = model.DoctorName!,
                 TargetDateTime = model.TargetDateTime,
@@ -47,6 +52,7 @@ namespace ClinicScheduler.Application.ViewModels
 
         public ReservationDomainModel Transfer(ReservationViewModel request)
             => new ReservationDomainModel(
+                request.ReservationId,
                 request.DoctorId,
                 request.DoctorName,
                 request.TargetDateTime,

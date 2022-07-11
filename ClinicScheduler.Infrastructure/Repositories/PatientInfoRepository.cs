@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ClinicScheduler.Infrastructure.Repositories
 {
-    public class PatientRepository : IPatientRepository
+    public class PatientRepository : IPatientInfoRepository
     {
         private readonly string directoryPath = "../ClinicScheduler.Infrastructure/Data";
 
@@ -26,6 +26,27 @@ namespace ClinicScheduler.Infrastructure.Repositories
                 domainModels.Add(domainModel);
             }
             return domainModels;
+        }
+
+        public PatientDomainModel PostNewPatientInfo(PatientDomainModel request)
+        {
+            // JSONファイル書き込みのため、全データ取得
+            var patientInfomations = GetAllPatientInfoFromDB();
+
+            // 追加新規データの作成
+            var requestModel = new PatientInfoRepositoryModel
+            {
+                PatientId = Guid.NewGuid().ToString(),
+                PatientName = request.PatientName,
+                CreateDate = DateTime.Now
+            };
+
+            // 取得データに新規データを追加し、書き込みの実施
+            patientInfomations = patientInfomations?.Append(requestModel);
+            string json = JsonConvert.SerializeObject(patientInfomations, Formatting.Indented);
+            File.WriteAllText(@$"{ directoryPath}/PatientInfoTable.json", json);
+
+            return ConvertModel(requestModel);
         }
 
         /// <summary>

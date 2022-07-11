@@ -14,9 +14,9 @@ namespace ClinicScheduler.Domain.Models
         /// <summary>
         /// 登録日時
         /// </summary>
-        public DateTime CreateDateTime { get; set; }
+        public DateTime? CreateDateTime { get; set; }
 
-        public PatientDomainModel(string patientId, string patientName, DateTime createDateTime)
+        public PatientDomainModel(string patientId, string patientName, DateTime? createDateTime)
         {
             PatientId = patientId;
             PatientName = patientName;

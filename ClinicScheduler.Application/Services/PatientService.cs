@@ -7,15 +7,22 @@ namespace ClinicScheduler.Application.IServices
 {
     public class PatientService : IPatientService
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IPatientInfoRepository _patientRepository;
 
-        public PatientService(IPatientRepository patientRepository)
+        public PatientService(IPatientInfoRepository patientRepository)
         {
             _patientRepository = patientRepository;
         }
 
         public IEnumerable<PatientViewModel> GetPatientListService()
             => ConvertToViewModels(_patientRepository.GetPatientList());
+
+        public PatientViewModel CreateNewPatientInfoService(PatientViewModel requestView)
+        {
+            var requestModel = new PatientViewModel().Transfer(requestView);
+            requestModel = _patientRepository.PostNewPatientInfo(requestModel);
+            return new PatientViewModel().Presenter(requestModel);
+        }
 
         /// <summary>
         /// ViewModelへ変換
