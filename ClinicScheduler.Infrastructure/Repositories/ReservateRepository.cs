@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.ReservationDomainModel;
 using ClinicScheduler.Domain.IRepositories;
 using ClinicScheduler.Infrastructure.Models;
 using Newtonsoft.Json;
@@ -63,6 +63,16 @@ namespace ClinicScheduler.Infrastructure.Repositories
             return domainmodels;
         }
 
+        public ReservationDomainModel GetSpecifiedDateReservation(DateTime specifiedDateTime)
+        {
+            var reservation = GetAllReservationsFromDB().FirstOrDefault(x => x.TargetDateTime == specifiedDateTime);
+            if (reservation is null)
+            {
+                return new ReservationDomainModel(string.Empty, string.Empty, specifiedDateTime, string.Empty, null);
+            }
+            return ConvertModel(reservation, null);
+        }
+
         public ReservationDomainModel PostReservation(ReservationDomainModel request)
         {
             // JSONファイル書き込みのため、全データ取得
@@ -86,10 +96,8 @@ namespace ClinicScheduler.Infrastructure.Repositories
             return new ReservationDomainModel(
                 requestModel.ReservationId,
                 request.DoctorId,
-                request.DoctorName,
                 request.TargetDateTime,
                 request.PatientId,
-                request.PatientName,
                 requestModel.ReservationDateTime);
         }
 
@@ -138,14 +146,12 @@ namespace ClinicScheduler.Infrastructure.Repositories
         /// </summary>
         /// <param name="reservations"></param>
         /// <returns></returns>
-        private ReservationDomainModel ConvertModel(ReservationRepositoryModel reservation, DoctorInfoRepositoryModel? doctorInfo)
+        private static ReservationDomainModel ConvertModel(ReservationRepositoryModel reservation, DoctorInfoRepositoryModel? doctorInfo)
             => new ReservationDomainModel(
                 reservation.ReservationId,
                 reservation.DoctorId,
-                doctorInfo?.DoctorName,
                 reservation.TargetDateTime,
                 reservation.PatientId,
-                null,
                 reservation.ReservationDateTime);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using ClinicScheduler.Application.ViewModels;
 using ClinicScheduler.Domain.IRepositories;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.PatientDomainModel;
 
 namespace ClinicScheduler.Application.IServices
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.ReservationDomainModel;
 
 namespace ClinicScheduler.Domain.IRepositories
 {
@@ -15,10 +15,16 @@ namespace ClinicScheduler.Domain.IRepositories
         /// <summary>
         /// 既存の関連する予約の取得
         /// </summary>
-        /// <param name="patientId">患者ID</param>
-        /// <param name="doctorId">医師ID</param>
+        /// <param name="request">リクエスト</param>
         /// <returns>既存の自予約（存在しない場合はnull）</returns>
         IEnumerable<ReservationDomainModel> GetRelatedExistingReservation(ReservationDomainModel request);
+
+        /// <summary>
+        /// 指定日時の予約の取得
+        /// </summary>
+        /// <param name="specifiedDateTime">対象日時</param>
+        /// <returns></returns>
+        ReservationDomainModel GetSpecifiedDateReservation(DateTime specifiedDateTime);
 
         /// <summary>
         /// 予約の実施

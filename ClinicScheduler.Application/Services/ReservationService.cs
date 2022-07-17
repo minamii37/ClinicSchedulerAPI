@@ -28,11 +28,21 @@ namespace ClinicScheduler.Application.IServices
 
         public ReservationViewModel PostReservationService(ReservationViewModel requestView)
         {
-            var requestModel = new ReservationViewModel().Transfer(requestView);
-            //var duplicateModels = _reservateRepository.GetRelatedExistingReservation(requestModel);
-            //duplicateModels.First().CheckDupulicate(duplicateModels, requestModel);
-            requestModel = _reservateRepository.PostReservation(requestModel);
-            return new ReservationViewModel().Presenter(requestModel);
+            if ((requestView.TargetDateTime.Minute != 0
+                    && requestView.TargetDateTime.Minute != 30)
+                || requestView.TargetDateTime.Second != 0
+                || requestView.TargetDateTime.Millisecond != 0)
+            {
+                // 30分刻みかつ、秒数が0秒ではないものは不正なリクエストとして扱う
+                throw new InvalidOperationException("時刻の形式が不正です");
+            }
+
+            var reservation = _reservateRepository.GetSpecifiedDateReservation(requestView.TargetDateTime);
+            var request = reservation.PostReservation(requestView.DoctorId, requestView.PatientId!);
+            _reservateRepository.PostReservation(request);
+
+            // 医師名と患者名ってどうやって撮るのが正解？？
+            return new ReservationViewModel().Presenter(request);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.PatientDomainModel;
 
 namespace ClinicScheduler.Domain.IRepositories
 {

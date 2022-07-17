@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.PatientDomainModel;
 using ClinicScheduler.Domain.IRepositories;
 using ClinicScheduler.Infrastructure.Models;
 using Newtonsoft.Json;

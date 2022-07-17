@@ -1,5 +1,5 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.ReservationDomainModel;
 
 namespace ClinicScheduler.Application.ViewModels
 {
@@ -43,21 +43,11 @@ namespace ClinicScheduler.Application.ViewModels
             {
                 ReservationId = model.ReservationId,
                 DoctorId = model.DoctorId,
-                DoctorName = model.DoctorName!,
+                //DoctorName = model.DoctorName!,
                 TargetDateTime = model.TargetDateTime,
                 PatientId = model.PatientId,
-                PatientName = model.PatientName,
+                //PatientName = model.PatientName,
                 ReservationDateTime = model.ReservationDateTime
             };
-
-        public ReservationDomainModel Transfer(ReservationViewModel request)
-            => new ReservationDomainModel(
-                request.ReservationId,
-                request.DoctorId,
-                request.DoctorName,
-                request.TargetDateTime,
-                request.PatientId,
-                request.PatientName,
-                null);
     }
 }
