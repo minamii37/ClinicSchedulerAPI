@@ -1,5 +1,5 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models.PatientDomainModel;
+using ClinicScheduler.Domain.Models.PatientInfoDomainModel;
 
 namespace ClinicScheduler.Domain.IRepositories
 {
@@ -9,14 +9,14 @@ namespace ClinicScheduler.Domain.IRepositories
         /// 患者一覧の取得
         /// </summary>
         /// <returns></returns>
-        IEnumerable<PatientDomainModel> GetPatientList();
+        IEnumerable<PatientInfoDomainModel> GetPatientList();
 
         /// <summary>
         /// 新規患者登録
         /// </summary>
         /// <param name="request">登録情報</param>
         /// <returns>登録内容</returns>
-        PatientDomainModel PostNewPatientInfo(PatientDomainModel request);
+        PatientInfoDomainModel PostNewPatientInfo(PatientInfoDomainModel request);
     }
 }
 

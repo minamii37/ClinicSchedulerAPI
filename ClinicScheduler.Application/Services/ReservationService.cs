@@ -17,10 +17,14 @@ namespace ClinicScheduler.Application.IServices
         public IEnumerable<ReservationViewModel> GetOwnReservationsService(string patientId)
         {
             var models = _reservateRepository.GetOwnReservations(patientId);
+            var doctorInfoList = _reservateRepository.GetTargetDoctorList(models.Select(x => x.DoctorId));
+            var patientInfo = _reservateRepository.GetTargetPatientList(new [] { patientId }).First();
+
             var views = new List<ReservationViewModel>();
             foreach (var model in models)
             {
-                var view = new ReservationViewModel().Presenter(model);
+                var doctorInfo = doctorInfoList.First(x => x.DoctorId.Equals(model.DoctorId));
+                var view = new ReservationViewModel().Presenter(model, doctorInfo, patientInfo);
                 views.Add(view);
             }
             return views;
@@ -37,12 +41,18 @@ namespace ClinicScheduler.Application.IServices
                 throw new InvalidOperationException("時刻の形式が不正です");
             }
 
+            // 予約処理
             var reservation = _reservateRepository.GetSpecifiedDateReservation(requestView.TargetDateTime);
             var request = reservation.PostReservation(requestView.DoctorId, requestView.PatientId!);
             _reservateRepository.PostReservation(request);
 
-            // 医師名と患者名ってどうやって撮るのが正解？？
-            return new ReservationViewModel().Presenter(request);
+            // 医師情報の取得
+            var doctorInfo = _reservateRepository.GetTargetDoctorList(new[] { request.DoctorId }).First();
+
+            // 患者情報の取得
+            var patientInfo = _reservateRepository.GetTargetPatientList(new[] { request.PatientId }).First();
+
+            return new ReservationViewModel().Presenter(request, doctorInfo, patientInfo);
         }
     }
 }

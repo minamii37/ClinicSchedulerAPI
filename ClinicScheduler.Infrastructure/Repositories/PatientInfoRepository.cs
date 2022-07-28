@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Net.Http;
-using ClinicScheduler.Domain.Models.PatientDomainModel;
+using ClinicScheduler.Domain.Models.PatientInfoDomainModel;
 using ClinicScheduler.Domain.IRepositories;
 using ClinicScheduler.Infrastructure.Models;
 using Newtonsoft.Json;
 using System.Net;
+using ClinicScheduler.Infrastructure.DBAccess;
 
 namespace ClinicScheduler.Infrastructure.Repositories
 {
-    public class PatientRepository : IPatientInfoRepository
+    public class PatientInfoRepository : IPatientInfoRepository
     {
-        private readonly string directoryPath = "../ClinicScheduler.Infrastructure/Data";
-
-        public PatientRepository()
+        public PatientInfoRepository()
         {
         }
 
-        public IEnumerable<PatientDomainModel> GetPatientList()
+        public IEnumerable<PatientInfoDomainModel> GetPatientList()
         {
-            var repositoryModels = GetAllPatientInfoFromDB();
-            var domainModels = new List<PatientDomainModel>();
+            var repositoryModels = new MstPatientInfomations().GetAllPatientInfoFromDB();
+
+            var domainModels = new List<PatientInfoDomainModel>();
             foreach (var repositoryModel in repositoryModels)
             {
                 var domainModel = ConvertModel(repositoryModel);
@@ -28,10 +28,25 @@ namespace ClinicScheduler.Infrastructure.Repositories
             return domainModels;
         }
 
-        public PatientDomainModel PostNewPatientInfo(PatientDomainModel request)
+        public IEnumerable<PatientInfoDomainModel> GetTargetPatientList(IEnumerable<string> patientIds)
+        {
+            var repositoryModels = new MstPatientInfomations()
+                .GetAllPatientInfoFromDB().Where(x => patientIds.Contains(x.PatientId));
+
+            var domainModels = new List<PatientInfoDomainModel>();
+            foreach (var repositoryModel in repositoryModels)
+            {
+                var domainModel = ConvertModel(repositoryModel);
+                domainModels.Add(domainModel);
+            }
+            return domainModels;
+        }
+
+        public PatientInfoDomainModel PostNewPatientInfo(PatientInfoDomainModel request)
         {
             // JSONファイル書き込みのため、全データ取得
-            var patientInfomations = GetAllPatientInfoFromDB();
+            var mstPatientInfomations = new MstPatientInfomations();
+            var patientInfomations = mstPatientInfomations.GetAllPatientInfoFromDB();
 
             // 追加新規データの作成
             var requestModel = new PatientInfoRepositoryModel
@@ -42,35 +57,18 @@ namespace ClinicScheduler.Infrastructure.Repositories
             };
 
             // 取得データに新規データを追加し、書き込みの実施
-            patientInfomations = patientInfomations?.Append(requestModel);
-            string json = JsonConvert.SerializeObject(patientInfomations, Formatting.Indented);
-            File.WriteAllText(@$"{ directoryPath}/PatientInfoTable.json", json);
+            patientInfomations = patientInfomations.Append(requestModel);
+            mstPatientInfomations.PostNewPatientInfoToDB(patientInfomations);
 
             return ConvertModel(requestModel);
-        }
-
-        /// <summary>
-        /// 患者テーブルデータの全取得
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<PatientInfoRepositoryModel> GetAllPatientInfoFromDB()
-        {
-            // JSONデータの取得
-            StreamReader r = new StreamReader($"{directoryPath}/PatientInfoTable.json");
-            string jsonString = r.ReadToEnd();
-            // JSONデータのデシリアライズ
-            IEnumerable<PatientInfoRepositoryModel>? repositoryModels =
-                JsonConvert.DeserializeObject<IEnumerable<PatientInfoRepositoryModel>>(jsonString);
-
-            return repositoryModels ?? Enumerable.Empty<PatientInfoRepositoryModel>();
         }
 
         /// <summary>
         /// リポジトリモデル→ドメインモデルの変換
         /// </summary>
         /// <returns></returns>
-        private PatientDomainModel ConvertModel(PatientInfoRepositoryModel patientInfo)
-            => new PatientDomainModel(patientInfo.PatientId, patientInfo.PatientName, patientInfo.CreateDate);
+        private PatientInfoDomainModel ConvertModel(PatientInfoRepositoryModel patientInfo)
+            => new PatientInfoDomainModel(patientInfo.PatientId, patientInfo.PatientName, patientInfo.CreateDate);
     }
 }
 

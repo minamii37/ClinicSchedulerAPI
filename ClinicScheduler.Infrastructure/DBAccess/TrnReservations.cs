@@ -6,7 +6,7 @@ namespace ClinicScheduler.Infrastructure.DBAccess
 {
     public class TrnReservations
     {
-        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.nfrastructure/Data";
+        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.Infrastructure/Data";
 
         public TrnReservations()
         {
@@ -16,7 +16,7 @@ namespace ClinicScheduler.Infrastructure.DBAccess
         /// 予約テーブルデータの全取得
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<ReservationRepositoryModel> GetAllReservations()
+        public IEnumerable<ReservationRepositoryModel> GetAllReservations()
         {
             // JSONデータの取得
             StreamReader r = new StreamReader($"{directoryPath}/ReservationTable.json");

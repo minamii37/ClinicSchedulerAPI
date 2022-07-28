@@ -1,9 +1,9 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models.PatientDomainModel;
+using ClinicScheduler.Domain.Models.PatientInfoDomainModel;
 
 namespace ClinicScheduler.Application.ViewModels
 {
-    public class PatientViewModel
+    public class PatientInfoViewModel
     {
         /// <summary>
         /// 患者ID
@@ -18,20 +18,20 @@ namespace ClinicScheduler.Application.ViewModels
         /// </summary>
         public DateTime? CreateDateTime { get; set; }
 
-        public PatientViewModel()
+        public PatientInfoViewModel()
         {
         }
 
-        public PatientViewModel Presenter(PatientDomainModel model)
-            => new PatientViewModel()
+        public PatientInfoViewModel Presenter(PatientInfoDomainModel model)
+            => new PatientInfoViewModel()
             {
                 PatientId = model.PatientId,
                 PatientName = model.PatientName,
                 CreateDateTime = model.CreateDateTime
             };
 
-        public PatientDomainModel Transfer(PatientViewModel view)
-            => new PatientDomainModel(
+        public PatientInfoDomainModel Transfer(PatientInfoViewModel view)
+            => new PatientInfoDomainModel(
                 view.PatientId,
                 view.PatientName,
                 null);

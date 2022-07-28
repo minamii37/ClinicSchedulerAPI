@@ -5,6 +5,8 @@ using ClinicScheduler.Domain.IRepositories;
 using ClinicScheduler.Infrastructure.Models;
 using Newtonsoft.Json;
 using System.Net;
+using ClinicScheduler.Domain.Models.ReservationDomainModel.ValueObjects;
+using ClinicScheduler.Infrastructure.DBAccess;
 
 namespace ClinicScheduler.Infrastructure.Repositories
 {
@@ -34,7 +36,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
             var models = new List<ReservationDomainModel>();
             foreach (var reservation in reservations)
             {
-                var model = ConvertModel(reservation, doctorInfomations.First(x => x.DoctorId == reservation.DoctorId));
+                var model = ConvertReservationModel(reservation);
                 models.Add(model);
             }
 
@@ -57,7 +59,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
             var domainmodels = new List<ReservationDomainModel>();
             foreach (var repositoryModel in repositoryModels)
             {
-                domainmodels.Add(ConvertModel(repositoryModel, null));
+                domainmodels.Add(ConvertReservationModel(repositoryModel));
             }
 
             return domainmodels;
@@ -70,7 +72,7 @@ namespace ClinicScheduler.Infrastructure.Repositories
             {
                 return new ReservationDomainModel(string.Empty, string.Empty, specifiedDateTime, string.Empty, null);
             }
-            return ConvertModel(reservation, null);
+            return ConvertReservationModel(reservation);
         }
 
         public ReservationDomainModel PostReservation(ReservationDomainModel request)
@@ -99,6 +101,34 @@ namespace ClinicScheduler.Infrastructure.Repositories
                 request.TargetDateTime,
                 request.PatientId,
                 requestModel.ReservationDateTime);
+        }
+
+        public IEnumerable<DoctorInfoModel> GetTargetDoctorList(IEnumerable<string> doctorIds)
+        {
+            var repositoryModels = new MstDoctorInfomations()
+                .GetAllDoctorInfomationsFromDB().Where(x => doctorIds.Contains(x.DoctorId));
+
+            var valueObjects = new List<DoctorInfoModel>();
+            foreach (var repositoryModel in repositoryModels)
+            {
+                var domainModel = ConvertDoctorInfoModel(repositoryModel);
+                valueObjects.Add(domainModel);
+            }
+            return valueObjects;
+        }
+
+        public IEnumerable<PatientInfoModel> GetTargetPatientList(IEnumerable<string> patientIds)
+        {
+            var repositoryModels = new MstPatientInfomations()
+                .GetAllPatientInfoFromDB().Where(x => patientIds.Contains(x.PatientId));
+
+            var valueObjects = new List<PatientInfoModel>();
+            foreach (var repositoryModel in repositoryModels)
+            {
+                var valueObject = ConvertPatientInfoModel(repositoryModel);
+                valueObjects.Add(valueObject);
+            }
+            return valueObjects;
         }
 
         /// <summary>
@@ -142,17 +172,33 @@ namespace ClinicScheduler.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// リポジトリモデル→ドメインモデルの変換
+        /// 予約情報リポジトリモデル→ドメインモデルの変換
         /// </summary>
-        /// <param name="reservations"></param>
+        /// <param name="reservation"></param>
         /// <returns></returns>
-        private static ReservationDomainModel ConvertModel(ReservationRepositoryModel reservation, DoctorInfoRepositoryModel? doctorInfo)
+        private static ReservationDomainModel ConvertReservationModel(ReservationRepositoryModel reservation)
             => new ReservationDomainModel(
                 reservation.ReservationId,
                 reservation.DoctorId,
                 reservation.TargetDateTime,
                 reservation.PatientId,
                 reservation.ReservationDateTime);
+
+        /// <summary>
+        /// 医師情報リポジトリモデル→ValueObjectモデル
+        /// </summary>
+        /// <param name="doctorInfo"></param>
+        /// <returns></returns>
+        private static DoctorInfoModel ConvertDoctorInfoModel(DoctorInfoRepositoryModel doctorInfo)
+            => new DoctorInfoModel(doctorInfo.DoctorId, doctorInfo.DoctorName, doctorInfo.CreateDate);
+
+        /// <summary>
+        /// 患者情報リポジトリモデル→ValueObjectモデル
+        /// </summary>
+        /// <param name="patientInfo"></param>
+        /// <returns></returns>
+        private static PatientInfoModel ConvertPatientInfoModel(PatientInfoRepositoryModel patientInfo)
+            => new PatientInfoModel(patientInfo.PatientId, patientInfo.PatientName, patientInfo.CreateDate);
     }
 }
 

@@ -22,7 +22,7 @@ namespace ClinicScheduler.Infrastructure.Models
         /// <summary>
         /// 予約日時
         /// </summary>
-        public DateTime? ReservationDateTime { get; set; }
+        public DateTime ReservationDateTime { get; set; }
         /// <summary>
         /// 承認者ID
         /// </summary>

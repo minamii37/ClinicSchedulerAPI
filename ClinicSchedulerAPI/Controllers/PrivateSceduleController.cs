@@ -16,19 +16,19 @@ public class PrivateScheduleController : ControllerBase
     }
 
     [HttpGet("specifiedDate")]
-    public IEnumerable<ScheduleViewModel> GetPrivateSchedule(DateTime specifiedDate)
+    public IEnumerable<PrivateScheduleViewModel> GetPrivateSchedule(DateTime specifiedDate)
     {
         return _privateScheduleService.GetPrivateScheduleForTheSpecifiedDateService(specifiedDate).ToList();
     }
 
     [HttpGet("doctorId")]
-    public IEnumerable<ScheduleViewModel> GetDoctorPrivateSchedule(string doctorId)
+    public IEnumerable<PrivateScheduleViewModel> GetDoctorPrivateSchedule(string doctorId)
     {
         return _privateScheduleService.GetDoctorPrivateScheduleService(doctorId).ToList();
     }
 
     [HttpGet("doctorId/startDate")]
-    public IEnumerable<ScheduleViewModel> GetDoctorPrivateScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
+    public IEnumerable<PrivateScheduleViewModel> GetDoctorPrivateScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
     {
         return _privateScheduleService.GetDoctorPrivateScheduleForTheSpecifiedWeekService(doctorId, startDate).ToList();
     }

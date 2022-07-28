@@ -8,21 +8,21 @@ namespace ClinicSchedulerAPI.Controllers;
 [Route("api/[controller]")]
 public class PatientController : ControllerBase
 {
-    private readonly IPatientService _patientService;
+    private readonly IPatientInfoService _patientService;
 
-    public PatientController(IPatientService patientService)
+    public PatientController(IPatientInfoService patientService)
     {
         _patientService = patientService;
     }
 
     [HttpGet()]
-    public IEnumerable<PatientViewModel> GetPatientList()
+    public IEnumerable<PatientInfoViewModel> GetPatientList()
     {
         return _patientService.GetPatientListService().ToList();
     }
 
     [HttpPost]
-    public PatientViewModel CreateNewPatientInfoService([FromBody]PatientViewModel request)
+    public PatientInfoViewModel CreateNewPatientInfoService([FromBody]PatientInfoViewModel request)
     {
         return _patientService.CreateNewPatientInfoService(request);
     }

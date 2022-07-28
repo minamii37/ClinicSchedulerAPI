@@ -16,19 +16,19 @@ public class PublicScheduleController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<ScheduleViewModel> GetPublicSchedule()
+    public IEnumerable<PublicScheduleViewModel> GetPublicSchedule()
     {
         return _publicScheduleService.GetPublicScheduleService().ToList();
     }
 
     [HttpGet("doctorId")]
-    public IEnumerable<ScheduleViewModel> GetDoctorPublicSchedule(string doctorId)
+    public IEnumerable<PublicScheduleViewModel> GetDoctorPublicSchedule(string doctorId)
     {
         return _publicScheduleService.GetDoctorPublicScheduleService(doctorId).ToList();
     }
 
     [HttpGet("doctorId/startDate")]
-    public IEnumerable<ScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
+    public IEnumerable<PublicScheduleViewModel> GetDoctorPublicScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate)
     {
         return _publicScheduleService.GetDoctorPublicScheduleForTheSpecifiedWeekService(doctorId, startDate).ToList();
     }

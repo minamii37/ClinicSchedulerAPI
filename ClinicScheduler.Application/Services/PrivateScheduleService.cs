@@ -1,7 +1,6 @@
 ﻿using System;
 using ClinicScheduler.Application.ViewModels;
 using ClinicScheduler.Domain.IRepositories;
-using ClinicScheduler.Domain.Models;
 
 namespace ClinicScheduler.Application.IServices
 {
@@ -14,28 +13,53 @@ namespace ClinicScheduler.Application.IServices
             _privateScheduleRepository = privateScheduleRepository;
         }
 
-        public IEnumerable<ScheduleViewModel> GetPrivateScheduleForTheSpecifiedDateService(DateTime specifiedDate)
-            => ConvertToViewModels(_privateScheduleRepository.GetPrivateScheduleForTheSpecifiedDate(specifiedDate));
-
-        public IEnumerable<ScheduleViewModel>GetDoctorPrivateScheduleService(string doctorId)
-            => ConvertToViewModels(_privateScheduleRepository.GetDoctorPrivateSchedule(doctorId));
-
-        public IEnumerable<ScheduleViewModel> GetDoctorPrivateScheduleForTheSpecifiedWeekService(string doctorId, DateTime startDate)
-            => ConvertToViewModels(_privateScheduleRepository.GetDoctorPrivateScheduleForTheSpecifiedWeek(doctorId, startDate));
-
-        /// <summary>
-        /// ViewModelへ変換
-        /// </summary>
-        /// <param name="models"></param>
-        /// <returns></returns>
-        private static IEnumerable<ScheduleViewModel> ConvertToViewModels(IEnumerable<ScheduleDomainModel> models)
+        public IEnumerable<PrivateScheduleViewModel> GetPrivateScheduleForTheSpecifiedDateService(DateTime specifiedDate)
         {
-            var views = new List<ScheduleViewModel>();
-            // 表示順は日付、ドクター名順
-            models.OrderBy(x => x.TargetDateTime).ThenBy(x => x.DoctorName).ToList()
-                .ForEach(x => views.Add(new ScheduleViewModel().PrivatePresenter(x)));
+            var privateScheduleList = _privateScheduleRepository.GetPrivateScheduleForTheSpecifiedDate(specifiedDate);
+            var doctorInfos = _privateScheduleRepository.GetTargetDoctorList(privateScheduleList.Select(x => x.DoctorId));
+            var patientInfos = _privateScheduleRepository.GetTargetPatientList(privateScheduleList.Select(x => x.PatientId));
 
-            return views;
+            var views = new List<PrivateScheduleViewModel>();
+            foreach (var privateSchedule in privateScheduleList)
+            {
+                var doctorInfo = doctorInfos.First(x => x.DoctorId.Equals(privateSchedule.DoctorId));
+                var patientInfo = patientInfos.First(x => x.PatientId.Equals(privateSchedule.PatientId));
+                var view = new PrivateScheduleViewModel().Presenter(privateSchedule, doctorInfo, patientInfo);
+                views.Add(view);
+            }
+            return views.OrderBy(x => x.TargetDateTime).ThenBy(x => x.DoctorName).ThenBy(x => x.PatientName);
+        }
+
+        public IEnumerable<PrivateScheduleViewModel> GetDoctorPrivateScheduleService(string doctorId)
+        {
+            var privateScheduleList = _privateScheduleRepository.GetDoctorPrivateSchedule(doctorId);
+            var doctorInfo = _privateScheduleRepository.GetTargetDoctorList(new[] { doctorId }).First();
+            var patientInfos = _privateScheduleRepository.GetTargetPatientList(privateScheduleList.Select(x => x.PatientId));
+
+            var views = new List<PrivateScheduleViewModel>();
+            foreach (var privateSchedule in privateScheduleList)
+            {
+                var patientInfo = patientInfos.First(x => x.PatientId.Equals(privateSchedule.PatientId));
+                var view = new PrivateScheduleViewModel().Presenter(privateSchedule, doctorInfo, patientInfo);
+                views.Add(view);
+            }
+            return views.OrderBy(x => x.TargetDateTime).ThenBy(x => x.PatientName);
+        }
+
+        public IEnumerable<PrivateScheduleViewModel> GetDoctorPrivateScheduleForTheSpecifiedWeekService(string doctorId, DateTime startDate)
+        {
+            var privateScheduleList = _privateScheduleRepository.GetDoctorPrivateScheduleForTheSpecifiedWeek(doctorId, startDate);
+            var doctorInfo = _privateScheduleRepository.GetTargetDoctorList(new[] { doctorId }).First();
+            var patientInfos = _privateScheduleRepository.GetTargetPatientList(privateScheduleList.Select(x => x.PatientId));
+
+            var views = new List<PrivateScheduleViewModel>();
+            foreach (var privateSchedule in privateScheduleList)
+            {
+                var patientInfo = patientInfos.First(x => x.PatientId.Equals(privateSchedule.PatientId));
+                var view = new PrivateScheduleViewModel().Presenter(privateSchedule, doctorInfo, patientInfo);
+                views.Add(view);
+            }
+            return views.OrderBy(x => x.TargetDateTime).ThenBy(x => x.PatientName);
         }
     }
 }

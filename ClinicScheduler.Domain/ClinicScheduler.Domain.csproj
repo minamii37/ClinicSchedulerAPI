@@ -13,13 +13,18 @@
     <None Remove="Models\PatientDomainModel\" />
     <None Remove="Models\ReservationDomainModel\" />
     <None Remove="Models\ReservationDomainModel\ValueObjects\" />
+    <None Remove="Models\DoctorDomainModel\" />
+    <None Remove="Models\ScheduleDomainModel\" />
+    <None Remove="Models\ScheduleDomainModel\ValueObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IRepositories\" />
     <Folder Include="Models\" />
-    <Folder Include="Models\ValueObjects\" />
     <Folder Include="Models\PatientDomainModel\" />
     <Folder Include="Models\ReservationDomainModel\" />
     <Folder Include="Models\ReservationDomainModel\ValueObjects\" />
+    <Folder Include="Models\DoctorDomainModel\" />
+    <Folder Include="Models\ScheduleDomainModel\" />
+    <Folder Include="Models\ScheduleDomainModel\ValueObjects\" />
   </ItemGroup>
 </Project>

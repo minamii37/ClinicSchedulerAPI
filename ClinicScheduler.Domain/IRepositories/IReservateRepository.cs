@@ -1,5 +1,6 @@
 ﻿using System;
 using ClinicScheduler.Domain.Models.ReservationDomainModel;
+using ClinicScheduler.Domain.Models.ReservationDomainModel.ValueObjects;
 
 namespace ClinicScheduler.Domain.IRepositories
 {
@@ -31,6 +32,20 @@ namespace ClinicScheduler.Domain.IRepositories
         /// </summary>
         /// <returns>予約成否</returns>
         ReservationDomainModel PostReservation(ReservationDomainModel model);
+
+
+        /// <summary>
+        /// 対象の医師一覧の取得
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<DoctorInfoModel> GetTargetDoctorList(IEnumerable<string> doctorIds);
+
+
+        /// <summary>
+        /// 対象の患者一覧の取得
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PatientInfoModel> GetTargetPatientList(IEnumerable<string> patientIds);
     }
 }
 

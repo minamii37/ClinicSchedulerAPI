@@ -1,5 +1,6 @@
 ﻿using System;
-using ClinicScheduler.Domain.Models;
+using ClinicScheduler.Domain.Models.ScheduleDomainModel;
+using ClinicScheduler.Domain.Models.ScheduleDomainModel.ValueObjects;
 
 namespace ClinicScheduler.Domain.IRepositories
 {
@@ -25,6 +26,20 @@ namespace ClinicScheduler.Domain.IRepositories
         /// <param name="startDate">スケジュール開始日</param>
         /// <returns>ドクター別の指定週非公開スケジュール</returns>
         IEnumerable<ScheduleDomainModel> GetDoctorPrivateScheduleForTheSpecifiedWeek(string doctorId, DateTime startDate);
+
+
+        /// <summary>
+        /// 対象の医師一覧の取得
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<DoctorInfoModel> GetTargetDoctorList(IEnumerable<string> doctorIds);
+
+
+        /// <summary>
+        /// 対象の患者一覧の取得
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PatientInfoModel> GetTargetPatientList(IEnumerable<string> patientIds);
     }
 }
 

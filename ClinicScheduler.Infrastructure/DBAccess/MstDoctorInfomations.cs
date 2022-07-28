@@ -1,4 +1,5 @@
 ﻿using System;
+using ClinicScheduler.Domain.Models.DoctorInfoDomainModel;
 using ClinicScheduler.Infrastructure.Models;
 using Newtonsoft.Json;
 
@@ -6,7 +7,7 @@ namespace ClinicScheduler.Infrastructure.DBAccess
 {
     public class MstDoctorInfomations
     {
-        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.nfrastructure/Data";
+        private readonly string directoryPath = "/Users/minami/Projects/ClinicSchedulerAPI/ClinicScheduler.Infrastructure/Data";
 
         public MstDoctorInfomations()
         {
@@ -38,6 +39,16 @@ namespace ClinicScheduler.Infrastructure.DBAccess
             repositoryModels = repositoryModels?.Where(x => doctorIdList.Contains(x.DoctorId));
 
             return repositoryModels ?? Enumerable.Empty<DoctorInfoRepositoryModel>();
+        }
+
+        /// <summary>
+        /// テーブルデータの書き込み（上書き）処理
+        /// </summary>
+        /// <param name="registDataList"></param>
+        public void PostNewDoctorInfoToDB(IEnumerable<DoctorInfoRepositoryModel> registDataList)
+        {
+            string json = JsonConvert.SerializeObject(registDataList, Formatting.Indented);
+            File.WriteAllText(@$"{ directoryPath}/DoctorInfoTable.json", json);
         }
     }
 }
